@@ -14,6 +14,8 @@ require('function.php');
     <meta name="author" content="">
 
     <title>Argo Blast Coating Login</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+
 </head>
 
 <body class="bg-dark">
