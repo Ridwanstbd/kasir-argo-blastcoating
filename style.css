@@ -1,201 +1,204 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    outline: none;
-    border: none;
-    text-decoration: none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
 }
-html{
-    scroll-behavior: smooth;
+html {
+  scroll-behavior: smooth;
 }
-.index{
-    font-family: 'Racing Sans One', cursive;
-    background-color: rgba(29, 29, 29, 1);
-    color: #dedede;
-    min-height: 2000px;
+.index {
+  font-family: "Racing Sans One", cursive;
+  background-color: rgba(29, 29, 29, 1);
+  color: #dedede;
+  min-height: 2000px;
 }
 
 .ikon {
-    width: 6rem;
-    height: 4rem;
+  width: 6rem;
+  height: 4rem;
 }
 /* Hero section Start */
 
-.hero{
-    min-height: 65vh;
-    display: flex;
-    align-items: center;
-    background-image: url('img/bg.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    position: relative;
+.hero {
+  min-height: 65vh;
+  display: flex;
+  align-items: center;
+  background-image: url("assets/img/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
 }
-.hero::after{
-    content: '';
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    bottom: 0;
-    background: linear-gradient(0deg,rgba(29, 29, 29, 1)3%,rgba(255,255,255,0)45%);
+.hero::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  background: linear-gradient(
+    0deg,
+    rgba(29, 29, 29, 1) 3%,
+    rgba(255, 255, 255, 0) 45%
+  );
 }
 
-.introduce .content{
-    padding: 1rem 7%;
-    max-width: 60rem;
-    z-index: 2;
+.introduce .content {
+  padding: 1rem 7%;
+  max-width: 60rem;
+  z-index: 2;
 }
-.introduce .content h1
-{
-    font-size: 2.8rem;
-    letter-spacing: 0.16rem;
-    line-height: 1.2;
-    text-shadow: 0 0 2rem rgb(55, 87, 5), 0 0 5px rgba(15, 39, 111, 0.75);
-    
+.introduce .content h1 {
+  font-size: 2.8rem;
+  letter-spacing: 0.16rem;
+  line-height: 1.2;
+  text-shadow: 0 0 2rem rgb(55, 87, 5), 0 0 5px rgba(15, 39, 111, 0.75);
 }
-.introduce .content p{
-    font-size: 1.5rem;
+.introduce .content p {
+  font-size: 1.5rem;
 }
 /* Hero section End */
 /* testimonu Section Start */
 
-.testimoni{
-    text-align: center;
+.testimoni {
+  text-align: center;
 }
-.testimoni h2{
-    margin: 0.2rem auto;
-    font-size: 2rem;
-    letter-spacing: 0.16rem;
+.testimoni h2 {
+  margin: 0.2rem auto;
+  font-size: 2rem;
+  letter-spacing: 0.16rem;
 }
-.testimoni h2 span{
-    color: greenyellow;
-    text-shadow: 0 0 2rem rgb(55, 87, 5), 0 0 5px rgba(15, 39, 111, 0.75);
+.testimoni h2 span {
+  color: greenyellow;
+  text-shadow: 0 0 2rem rgb(55, 87, 5), 0 0 5px rgba(15, 39, 111, 0.75);
 }
-.testimoni p{
-    margin: 1rem auto;
-    font-size: 1.5rem;
+.testimoni p {
+  margin: 1rem auto;
+  font-size: 1.5rem;
 }
-.testimoni .row{
-        background-image: url('img/bg.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        
+.testimoni .row {
+  background-image: url("assets/img/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
 }
-.testimoni .row::after{
-    content: '';
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    bottom: 0;
-    background: linear-gradient(180deg,rgba(29, 29, 29, 1)3%,rgba(255,255,255,0)75%);
-
+.testimoni .row::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(29, 29, 29, 1) 3%,
+    rgba(255, 255, 255, 0) 75%
+  );
 }
-.testimoni .row .menu{
-    z-index: 2;
-    position: relative;
-    display: flex;
-    padding: 1rem 7%;
-    flex-wrap: wrap;
-    justify-content:center;
-    gap: 4rem;
+.testimoni .row .menu {
+  z-index: 2;
+  position: relative;
+  display: flex;
+  padding: 1rem 7%;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4rem;
 }
 .index .btn-cek-pesan {
-    position: fixed;
-    z-index: 3;
-    bottom: 1rem;
-    right: 1rem;
-    color: #ffffff;
-    padding: 0.2rem 0.5rem;
-    background-color: #eaeaea;
-    border-radius: 10px;
+  position: fixed;
+  z-index: 3;
+  bottom: 1rem;
+  right: 1rem;
+  color: #ffffff;
+  padding: 0.2rem 0.5rem;
+  background-color: #eaeaea;
+  border-radius: 10px;
 }
-.index .btn-cek-pesan a{
-    display: block;
-    color: #ffffff;
-    padding: 0.7rem 1.4rem;
-    margin: 0.5rem 0;
-    border-radius: 5px;
+.index .btn-cek-pesan a {
+  display: block;
+  color: #ffffff;
+  padding: 0.7rem 1.4rem;
+  margin: 0.5rem 0;
+  border-radius: 5px;
 }
-.index .btn-cek-pesan #hrg{
-    background-color: #bd4c00;
+.index .btn-cek-pesan #hrg {
+  background-color: #bd4c00;
 }
-.index .btn-cek-pesan #psn{
-    background-color: #199113;
+.index .btn-cek-pesan #psn {
+  background-color: #199113;
 }
 
-.testimoni .row .menu .col img{
-    width: 18rem;
-    height: 18rem;
-    box-shadow: 0 0 2rem rgb(55, 87, 5), 0 0 5px rgba(15, 39, 111, 0.75);
-    border-radius: 5px;
-
+.testimoni .row .menu .col img {
+  width: 18rem;
+  height: 18rem;
+  box-shadow: 0 0 2rem rgb(55, 87, 5), 0 0 5px rgba(15, 39, 111, 0.75);
+  border-radius: 5px;
 }
 /* testimonu Section End */
 /* daftar harga */
 .daftar-harga {
-    margin: 2rem 7%;
-    height: 100vh;
-    overflow-x: auto;
+  margin: 2rem 7%;
+  height: 100vh;
+  overflow-x: auto;
 }
-.daftar-harga .card{
-    text-align: center;
-    padding: 1rem 0.5rem;
-    background-color: #454545;
-    border-radius: 5px;
+.daftar-harga .card {
+  text-align: center;
+  padding: 1rem 0.5rem;
+  background-color: #454545;
+  border-radius: 5px;
 }
-.daftar-harga .card h2{
-    letter-spacing: 0.2rem;
+.daftar-harga .card h2 {
+  letter-spacing: 0.2rem;
 }
-.daftar-harga .card p{
-    margin: 0.5rem 0;
+.daftar-harga .card p {
+  margin: 0.5rem 0;
 }
-.daftar-harga .tb-view{
-    border-radius: 5px;
-    width: 100%;
-    margin-top: 1rem;
+.daftar-harga .tb-view {
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 1rem;
 }
-.daftar-harga .tb-view,td{
-    text-align: center;
-    padding: 0.5rem 0;
+.daftar-harga .tb-view,
+td {
+  text-align: center;
+  padding: 0.5rem 0;
 }
-.daftar-harga .tb-view,tr:nth-child(even){
-    background-color: #454545;
-    color: #ffffff;
+.daftar-harga .tb-view,
+tr:nth-child(even) {
+  background-color: #454545;
+  color: #ffffff;
 }
-
 
 /* daftar harga */
 /* footer */
-footer{
-    background-color: #bd4c00;
-    text-align: center;
-    height: 9rem;
+footer {
+  background-color: #bd4c00;
+  text-align: center;
+  height: 9rem;
 }
 /* footer */
-@media (max-width:1366px) {
-    
+@media (max-width: 1366px) {
 }
-@media (max-width:840px) {
-    .ikon {
+@media (max-width: 840px) {
+  .ikon {
     width: 9rem;
     height: 2.8rem;
-}
-.hero{
+  }
+  .hero {
     min-height: 20vh;
+  }
+  .introduce .content p {
+    font-size: 1rem;
+    letter-spacing: 0;
+  }
 }
-    .introduce .content p{
-        font-size: 1rem;
-        letter-spacing: 0;
-    }
+.testimoni h2,
+.testimoni p {
+  padding: 0 7%;
 }
-.testimoni h2 , .testimoni p{
-    padding: 0 7%;
-}
-@media (max-width:375px) {
-    
+@media (max-width: 375px) {
 }
