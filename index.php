@@ -41,55 +41,55 @@
         <div class="row">
             <div class="menu" >
                 <div class="col">
-                    <img src="img/1.png" alt="">
+                    <img src="assets/img/1.png" alt="">
                 </div>
                 <div class="col">
-                    <img src="img/2.png" alt="">
+                    <img src="assets/img/2.png" alt="">
                 </div>
                 <div class="col">
-                    <img src="img/3.png" alt="">
+                    <img src="assets/img/3.png" alt="">
                 </div>
                 <div class="col">
-                    <img src="img/4.png" alt="">
+                    <img src="assets/img/4.png" alt="">
                 </div>
                 <div class="col">
-                    <img src="img/5.png" alt="">
+                    <img src="assets/img/5.png" alt="">
                 </div>
                 <div class="col">
-                    <img src="img/6.png" alt="">
+                    <img src="assets/img/6.png" alt="">
                 </div>
                 <div class="col">
-                    <img src="img/7.png" alt="">
+                    <img src="assets/img/7.png" alt="">
                 </div>
                 <div class="col">
-                    <img src="img/8.png" alt="">
+                    <img src="assets/img/8.png" alt="">
                 </div>
                 <div class="col">
-                    <img src="img/9.png" alt="">
+                    <img src="assets/img/9.png" alt="">
                 </div>
                 <div class="col">
-                    <img src="img/10.png" alt="">
+                    <img src="assets/img/10.png" alt="">
                 </div>
                 <div class="col">
-                    <img src="img/11.png" alt="">
+                    <img src="assets/img/11.png" alt="">
                 </div>
                 <div class="col">
-                    <img src="img/12.png" alt="">
+                    <img src="assets/img/12.png" alt="">
                 </div>
                 <div class="col">
-                    <img src="img/13.png" alt="">
+                    <img src="assets/img/13.png" alt="">
                 </div>
                 <div class="col">
-                    <img src="img/14.png" alt="">
+                    <img src="assets/img/14.png" alt="">
                 </div>
                 <div class="col">
-                    <img src="img/15.png" alt="">
+                    <img src="assets/img/15.png" alt="">
                 </div>
                 <div class="col">
-                    <img src="img/16.png" alt="">
+                    <img src="assets/img/16.png" alt="">
                 </div>
                 <div class="col">
-                    <img src="img/17.png" alt="">
+                    <img src="assets/img/17.png" alt="">
                 </div>
             </div>
             
