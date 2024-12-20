@@ -1,0 +1,167 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+html {
+  scroll-behavior: smooth;
+}
+.bg-dark {
+  font-family: "Racing Sans One", cursive;
+  background-image: url("../img/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.container {
+  margin: 0 8rem;
+}
+/* Content centering */
+.content-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Card styling */
+.card {
+  background-color: rgba(222, 222, 222, 0.9);
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Row and column layout */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-lg-6 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+/* Padding utilities */
+.p-5 {
+  padding: 3rem;
+}
+
+.my-5 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+/* Form styling */
+.form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  margin-bottom: 1rem;
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.5rem;
+  transition: all 0.15s ease-in-out;
+  width: 100%;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border: 1px solid #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+/* Custom checkbox */
+.custom-control {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.custom-control-input {
+  position: absolute;
+  left: 0;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.25rem;
+}
+
+.custom-control-label {
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+/* Text utilities */
+.text-center {
+  text-align: center;
+}
+
+.text-gray-900 {
+  color: #3a3b45;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+/* Horizontal line */
+hr {
+  margin: 1.5rem 0;
+  border-top: 1px solid #eaecf4;
+}
+
+/* Alert styling */
+.alert {
+  position: relative;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+}
+
+/* Responsive layout */
+@media (min-width: 992px) {
+}

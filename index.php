@@ -1,5 +1,5 @@
 <?php 
-    require 'function.php'
+    require 'controllers/db.php'
 ?>
 
 <!DOCTYPE html>
