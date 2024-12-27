@@ -128,7 +128,6 @@ html {
   border-radius: 0.25rem;
   color: white;
   margin: 0 0.25rem;
-  
 }
 
 .view-btn {
@@ -138,7 +137,6 @@ html {
 .delete-btn {
   background-color: #dc3545;
 }
-
 
 .form-input {
   width: 100%;

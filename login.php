@@ -1,5 +1,7 @@
 <?php
-    require 'controllers/db.php';
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     require 'controllers/loginController.php';
     $err = login();
 ?>
@@ -47,6 +49,7 @@
                                     <?php } ?>
                                 
                                 <form action=""  method="post" class="user">
+                                    <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
                                     <div class="form-group mb-2">
                                         <input type="text" name="username" class="form-control form-control-user"
                                             id="exampleInputEmail" aria-describedby="emailHelp"

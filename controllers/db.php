@@ -1,5 +1,5 @@
+<!-- db.php untuk Menghubungkan ke basis data -->
 <?php
-// Menghubungkan ke basis data
 $isHostDb = 'localhost';
 $isUserDb = 'root';
 $isPassDb = '';

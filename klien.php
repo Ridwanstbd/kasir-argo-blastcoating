@@ -1,9 +1,8 @@
 <?php
-
-    require 'controllers/db.php';
+    require 'controllers/loginController.php';
     require 'controllers/klienController.php';
-
     tambahKlien();
+    requireLogin();
 ?>
 <!-- klien.php -->
 <!DOCTYPE html>
@@ -46,7 +45,7 @@
                         <a class="nav-link" href="klien.php">Klien</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="controllers/logout.php">Logout</a>
+                        <a class="nav-link" href="logout.php">Logout</a>
                     </li>
                 </ul>
             </div>

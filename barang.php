@@ -1,9 +1,9 @@
+<!-- barang.php -->
 <?php
-
-    require 'controllers/db.php';
+    require 'controllers/loginController.php';
     require 'controllers/barangController.php';
-
-    tambahBarang();
+    barang();
+    requireLogin();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,124 +17,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
-
     <title>Argo Blast Coating</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="assets/css/dashboard.css">
-    <style>
-        /* Modal Styles */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-wrapper {
-            background-color: white;
-            width: 100%;
-            max-width: 500px;
-            border-radius: 5px;
-            position: relative;
-        }
-
-        .modal-content {
-            position: relative;
-        }
-
-        .modal-header {
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-body {
-            padding: 15px;
-        }
-
-        .modal-footer {
-            padding: 15px;
-            border-top: 1px solid #ddd;
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-
-        .modal-close {
-            border: none;
-            background: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0;
-            color: #666;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        .submit-btn {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .cancel-btn {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        /* Navbar toggle styles */
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .nav-toggle {
-                display: block;
-            }
-
-            .nav-menu {
-                display: none;
-                width: 100%;
-            }
-
-            .nav-menu.active {
-                display: block;
-            }
-
-            .nav-list {
-                flex-direction: column;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/modal.css">
+    <script src="assets/js/modal.js" defer></script>
+    <script src="assets/js/barang.js" defer></script>
 </head>
 
 <body>    
@@ -173,7 +61,13 @@
                 <div class="card-content">
                     <div class="card-info">
                         <div class="card-label">Jumlah Barang</div>
-                        <div class="card-value">0</div>
+                        <div class="card-value">
+                            <?php
+                                $count_query = mysqli_query($conn, "SELECT COUNT(*) as count FROM tb_barang");
+                                $count_result = mysqli_fetch_assoc($count_query);
+                                echo $count_result['count'];
+                            ?>
+                        </div>
                     </div>
                     <button type="button" class="add-button" data-modal-target="#barang">Tambah Barang</button>
                 </div>
@@ -183,6 +77,7 @@
         <div class="data-card">
             <div class="search-section">
                 <form method="post">
+                    <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
                     <div class="search-group">
                         <input type="text" name="tcari" class="search-input" placeholder="Masukan Barang !!">
                         <button class="search-btn" type="submit" name="bcari">Cari</button>
@@ -205,6 +100,7 @@
                     </thead>                                
                     <tbody>
                         <?php 
+                        $query = barang();
                         $getbarang = mysqli_query($conn,"SELECT * FROM tb_barang");
                         $i = 1;
                         
@@ -223,7 +119,7 @@
                             <td><?=$keterangan?></td>
                             <td class="action-cell">
                                 <a class="view-btn" href="#" onclick="openEditModal('<?=$idbarang?>', '<?=$namabarang?>', '<?=$layanan?>', '<?=$harga?>', '<?=$keterangan?>')">Ubah</a>
-                                <a class="delete-btn" href="#">Hapus</a>
+                                <a class="delete-btn" href="#" onclick="confirmDelete('<?=$idbarang?>')">Hapus</a>
                             </td>
                         </tr>
                         <?php }; ?>
@@ -249,6 +145,7 @@
                 </div>
 
                 <form method="post">
+                    <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
                     <div class="modal-body">
                         <input type="text" name="nama_barang" placeholder="Nama Barang" class="form-input" required>
                         <input type="text" name="layanan" placeholder="Layanan" class="form-input" required>
@@ -273,6 +170,7 @@
                 </div>
 
                 <form method="post">
+                    <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
                     <div class="modal-body">
                         <input type="hidden" name="idbarang" id="edit_idbarang">
                         <input type="text" name="nama_barang" id="edit_nama_barang" placeholder="Nama Barang" class="form-input" required>
@@ -290,62 +188,5 @@
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const openModalButtons = document.querySelectorAll('[data-modal-target]');
-            const closeModalButtons = document.querySelectorAll('[data-modal-close]');
-
-            openModalButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const modal = document.querySelector(button.dataset.modalTarget);
-                    openModal(modal);
-                });
-            });
-            window.openEditModal = function(id, nama, layanan, harga, keterangan) {
-                const modal = document.querySelector('#editBarang');
-                document.getElementById('edit_idbarang').value = id;
-                document.getElementById('edit_nama_barang').value = nama;
-                document.getElementById('edit_layanan').value = layanan;
-                document.getElementById('edit_harga').value = harga;
-                document.getElementById('edit_keterangan').value = keterangan;
-                
-                modal.classList.add('active');
-            }
-
-            closeModalButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const modal = button.closest('.modal');
-                    closeModal(modal);
-                });
-            });
-
-            document.addEventListener('click', (e) => {
-                if (e.target.classList.contains('modal')) {
-                    closeModal(e.target);
-                }
-            });
-
-            function openModal(modal) {
-                if (modal == null) return;
-                modal.classList.add('active');
-            }
-
-            function closeModal(modal) {
-                if (modal == null) return;
-                modal.classList.remove('active');
-            }
-
-            const navToggle = document.getElementById('navToggle');
-            const navMenu = document.getElementById('navbarTogglerDemo01');
-
-            if (navToggle && navMenu) {
-                navToggle.addEventListener('click', () => {
-                    navMenu.classList.toggle('active');
-                    navToggle.classList.toggle('active');
-                });
-            }
-        });
-    </script>
 </body>
 </html>
