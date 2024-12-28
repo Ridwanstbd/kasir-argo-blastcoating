@@ -1,9 +1,8 @@
-<?php  
+<?php
     require 'controllers/loginController.php';
     require 'controllers/pesananController.php';
-    
+    $query = pesanan();
     requireLogin();
-    tambahPesanan();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,12 +20,15 @@
     <title>Argo Blast Coating</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="assets/css/modal.css">
+    <script src="assets/js/modal.js" defer></script>
+    <script src="assets/js/pesanan.js" defer></script>
 </head>
 
 <body>    
     <!-- Navbar Start -->
     <nav class="navbar">
-        <div class="nav-container">
+    <div class="nav-container">
             <a href="index.php"><img src="assets/img/argo-jaya.png" alt="Argo Jaya" class="ikon"></a>
             
             <button class="nav-toggle" type="button" id="navToggle">
@@ -60,14 +62,30 @@
                 <div class="card-content">
                     <div class="card-info">
                         <div class="card-label">Jumlah Pesanan</div>
-                        <div class="card-value">0</div>
+                        <div class="card-value">
+                            <?php
+                                $count_query = mysqli_query($conn, "SELECT COUNT(*) as count FROM tb_pesanan");
+                                $count_result = mysqli_fetch_assoc($count_query);
+                                echo $count_result['count'];
+                            ?>
+                        </div>
                     </div>
-                    <button type="button" class="add-button" data-modal-target="#pesanan">Tambah Pesanan</button>
                 </div>
             </div>
         </div>
 
         <div class="data-card">
+            <div class="search-section">
+                <form method="post">
+                    <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
+                    <div class="search-group">
+                        <input type="text" name="tcari" class="search-input" placeholder="Cari pesanan...">
+                        <button class="search-btn" type="submit" name="bcari">Cari</button>
+                        <button class="reset-btn" type="submit" name="breset">Reset</button>
+                    </div>
+                </form>
+            </div>
+
             <div class="table-wrapper">
                 <table class="data-table">
                     <thead>
@@ -76,32 +94,27 @@
                             <th>Waktu</th>
                             <th>Nama Klien</th>
                             <th>Status</th>
-                            <th>Jumlah</th>
                             <th>Aksi</th>                                            
                         </tr>
                     </thead>                                
                     <tbody>
                         <?php 
-                        $getpesanan = mysqli_query($conn,"SELECT * FROM tb_pesanan p, tb_klien hub WHERE 
-                        p.id_pemesan=hub.id_pemesan");
-                        $i = 1;
-                        
-                        while($p=mysqli_fetch_array($getpesanan)){
-                            $idPesanan= $p['id_pesanan'];
-                            $idPemesan= $p['nama'];
-                            $alamatkl= $p['alamat'];
+                        $getpesanan = mysqli_query($conn, $query);
+                        while($p = mysqli_fetch_array($getpesanan)){
+                            $idPesanan = $p['id_pesanan'];
                             $waktuPesan = $p['waktu_pesan'];
-                            $status = $p['kstatus'];                                 
+                            $namaKlien = $p['nama'];
+                            $alamat = $p['alamat'];
+                            $status = $p['kstatus'];
                         ?>
                         <tr>
-                            <td><?=$idPesanan ?></td>
-                            <td><?=$waktuPesan ?></td>
-                            <td><?=$idPemesan ?> - <?=$alamatkl ?></td>
-                            <td><?=$status ?></td>
-                            <td>Jumlah</td>
+                            <td><?=$idPesanan?></td>
+                            <td><?=$waktuPesan?></td>
+                            <td><?=$namaKlien?> - <?=$alamat?></td>
+                            <td><?=$status?></td>
                             <td class="action-cell">
-                                <a class="view-btn" href="view.php?idp=<?=$idPesanan; ?>" target="blank">Tampilkan</a>
-                                <a class="delete-btn" href="#">Hapus</a>
+                                <a class="view-btn" href="#" onclick="openEditModal('<?=$idPesanan?>', '<?=$status?>', '<?=$waktuPesan?>')">Ubah</a>
+                                <a class="delete-btn" href="#" onclick="confirmDelete('<?=$idPesanan?>')">Hapus</a>
                             </td>
                         </tr>
                         <?php }; ?>
@@ -117,48 +130,41 @@
         </div>
     </footer>
 
-    <!-- Modal -->
-    <div class="modal" id="pesanan">
+
+    <!-- Edit Modal -->
+    <div class="modal" id="editPesanan">
         <div class="modal-wrapper">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Pesanan</h4>
+                    <h4 class="modal-title">Ubah Pesanan</h4>
                     <button type="button" class="modal-close" data-modal-close>&times;</button>
                 </div>
 
                 <form method="post">
+                    <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
                     <div class="modal-body">
-                        <select name="pklien" class="form-input">
-                            <option selected>-- Pilih Klien --</option>
-                            <?php 
-                            $getklien = mysqli_query($conn,"SELECT * FROM tb_klien");
-                            while($kl=mysqli_fetch_array($getklien)){
-                                $namaklien = $kl['nama'];
-                                $idklien = $kl['id_pemesan'];
-                                $alamatklien = $kl['alamat'];
-                            ?>
-                            <option value="<?=$idklien ?>"><?=$namaklien;?> - <?=$alamatklien;?></option>
-                            <?php }; ?>
-                        </select>
-
-                        <select class="form-input" name="tstatus">
-                            <option selected>-- Pilih Status --</option>
+                        <input type="hidden" name="idpesanan" id="edit_idpesanan">
+                        
+                        <select name="tstatus" id="edit_status" class="form-input" required>
+                            <option value="">-- Pilih Status --</option>
+                            <option value="Baru">Baru</option>
                             <option value="Dalam Antrian">Dalam Antrian</option>
                             <option value="Sedang Diproses">Sedang Diproses</option>
                             <option value="Sedang Dikerjakan">Sedang Dikerjakan</option>
                             <option value="Selesai">Selesai</option>
                         </select>
                         
-                        <input type="datetime-local" name="twaktu" class="form-input" placeholder="tambah waktu">
+                        <input type="datetime-local" name="twaktu" id="edit_waktu" class="form-input" required>
                     </div>
                     
                     <div class="modal-footer">
-                        <button type="submit" name="tambahpesanan" class="submit-btn">Tambah</button>
-                        <button type="button" class="cancel-btn" data-modal-close>Close</button>
+                        <button type="submit" name="ubahpesanan" class="submit-btn">Simpan</button>
+                        <button type="button" class="cancel-btn" data-modal-close>Batal</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
 </body>
 </html>

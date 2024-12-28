@@ -105,7 +105,7 @@
                         $i = 1;
                         
                         while($p=mysqli_fetch_array($getbarang)){
-                            $idbarang = $p['id_barang']; // Ambil ID barang
+                            $idbarang = $p['id_barang']; 
                             $namabarang = $p['nama_barang'];
                             $layanan = $p['layanan'];
                             $harga = $p['harga'];

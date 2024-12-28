@@ -29,7 +29,7 @@
     <!-- button floating -->
     <div class="btn-cek-pesan" >
         <a id="hrg" href="#harga">Cek Harga</a>
-        <a id="psn" href="https://wa.wizard.id/9c9fa8" target="blank" >Pesan Sekarang</a>
+        <a id="psn" href="buat-pesanan.php" target="blank" >Pesan Sekarang</a>
     </div>
     <!-- button floating -->
     <!-- testimoni -->

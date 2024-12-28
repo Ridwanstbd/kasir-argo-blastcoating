@@ -1,10 +1,9 @@
 <?php
     require 'controllers/loginController.php';
     require 'controllers/klienController.php';
-    tambahKlien();
+    $query = klien();
     requireLogin();
 ?>
-<!-- klien.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +20,9 @@
     <title>Argo Blast Coating</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="assets/css/modal.css">
+    <script src="assets/js/modal.js" defer></script>
+    <script src="assets/js/klien.js" defer></script>
 </head>
 
 <body>    
@@ -60,7 +62,13 @@
                 <div class="card-content">
                     <div class="card-info">
                         <div class="card-label">Jumlah Klien</div>
-                        <div class="card-value">0</div>
+                        <div class="card-value">
+                            <?php
+                                $count_query = mysqli_query($conn, "SELECT COUNT(*) as count FROM tb_klien");
+                                $count_result = mysqli_fetch_assoc($count_query);
+                                echo $count_result['count'];
+                            ?>
+                        </div>
                     </div>
                     <button type="button" class="add-button" data-modal-target="#pemesan">Tambah Data Klien</button>
                 </div>
@@ -68,6 +76,17 @@
         </div>
 
         <div class="data-card">
+            <div class="search-section">
+                <form method="post">
+                    <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
+                    <div class="search-group">
+                        <input type="text" name="tcari" class="search-input" placeholder="Masukan Nama Klien !!">
+                        <button class="search-btn" type="submit" name="bcari">Cari</button>
+                        <button class="reset-btn" type="submit" name="breset">Reset</button>
+                    </div>
+                </form>
+            </div>
+
             <div class="table-wrapper">
                 <table class="data-table">
                     <thead>
@@ -81,22 +100,23 @@
                     </thead>                                
                     <tbody>
                         <?php
-                        $getklien = mysqli_query($conn,"SELECT * FROM tb_klien");
-                        $noklien = 1;
+                        $getklien = mysqli_query($conn, $query);
+                        $i = 1;
                         
-                        while($hub=mysqli_fetch_array($getklien)){
-                            $namaklien = $hub['nama'];
-                            $nomortelepon = $hub['no_hp'];
-                            $alamat = $hub['alamat'];
+                        while($k = mysqli_fetch_array($getklien)){
+                            $idklien = $k['id_pemesan'];
+                            $namaklien = $k['nama'];
+                            $nomortelepon = $k['no_hp'];
+                            $alamat = $k['alamat'];
                         ?>
                         <tr>
-                            <td><?=$noklien++?></td>
+                            <td><?=$i++?></td>
                             <td><?=$namaklien?></td>
                             <td><?=$nomortelepon?></td>
                             <td><?=$alamat?></td>                                           
                             <td class="action-cell">
-                                <a class="view-btn" href="#">Ubah</a>
-                                <a class="delete-btn" href="#">Hapus</a>
+                                <a class="view-btn" href="#" onclick="openEditModal('<?=$idklien?>', '<?=$namaklien?>', '<?=$nomortelepon?>', '<?=$alamat?>')">Ubah</a>
+                                <a class="delete-btn" href="#" onclick="confirmDelete('<?=$idklien?>')">Hapus</a>
                             </td>                                           
                         </tr>
                         <?php }; ?>
@@ -112,7 +132,7 @@
         </div>
     </footer>
 
-    <!-- Modal -->
+    <!-- Modal Add -->
     <div class="modal" id="pemesan">
         <div class="modal-wrapper">
             <div class="modal-content">
@@ -122,9 +142,10 @@
                 </div>
 
                 <form method="post">
+                    <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
                     <div class="modal-body">
                         <input type="text" name="namaKlien" placeholder="Nama Klien" class="form-input" required>
-                        <input type="num" name="noTelepon" placeholder="Nomor Telepon" class="form-input" required>
+                        <input type="text" name="noTelepon" placeholder="Nomor Telepon" class="form-input" required>
                         <input type="text" name="alamat" placeholder="Alamat" class="form-input" required>                    
                     </div>
                     
@@ -136,5 +157,33 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Edit -->
+    <div class="modal" id="editKlien">
+        <div class="modal-wrapper">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Ubah Data Klien</h4>
+                    <button type="button" class="modal-close" data-modal-close>&times;</button>
+                </div>
+
+                <form method="post">
+                    <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
+                    <div class="modal-body">
+                        <input type="hidden" name="idklien" id="edit_idklien">
+                        <input type="text" name="namaKlien" id="edit_nama_klien" placeholder="Nama Klien" class="form-input" required>
+                        <input type="text" name="noTelepon" id="edit_no_telepon" placeholder="Nomor Telepon" class="form-input" required>
+                        <input type="text" name="alamat" id="edit_alamat" placeholder="Alamat" class="form-input" required>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="submit" name="ubahklien" class="submit-btn">Simpan</button>
+                        <button type="button" class="cancel-btn" data-modal-close>Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
