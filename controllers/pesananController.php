@@ -57,5 +57,5 @@ function pesanan() {
     }
     
     return "SELECT p.*, k.nama, k.alamat FROM tb_pesanan p 
-            JOIN tb_klien k ON p.id_pemesan=k.id_pemesan";
+            JOIN tb_klien k ON p.id_pemesan=k.id_pemesan ORDER BY p.waktu_pesan DESC";
 }
