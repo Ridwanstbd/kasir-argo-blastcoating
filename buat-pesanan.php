@@ -190,7 +190,7 @@
                                     </div>
                                     
                                     <button type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-4">
-                                        Simpan Pesanan</button>
+                                        KIRIM PESANAN JASA</button>
                                 </form>
                             </div>
                         </div>
